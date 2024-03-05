@@ -53,10 +53,15 @@ class DeletePhoneView(generic.DeleteView):
 class CreatePhoneView(generic.CreateView):
     template_name = 'phones/create_phone.html'
     form_class = forms.PhoneShopForm
-    success_url = '/'
+    success_url = '/good/'
 
     def form_valid(self, form):
         return super(CreatePhoneView, self).form_valid(form=form)
+
+
+def good_request(request):
+    return render(request, template_name='phones/good.html',
+                  context={'good': models.PhoneShop})
 
 
 # def create_phone_view(request):
@@ -117,5 +122,3 @@ class SearchView(generic.ListView):
         context = super().get_context_data(**kwargs)
         context["q"] = self.request.GET.get("q")
         return context
-
-
